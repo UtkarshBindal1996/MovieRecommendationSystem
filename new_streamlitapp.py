@@ -80,7 +80,7 @@ def adjusted_cosine_similarity(user1_ratings, user2_ratings, min_ratings=7):
 # User input dictionary (initially empty)
 user_ratings = {}
 
-def recommend_movies(user_ratings, movies):
+def recommend_movies(user_ratings):
     # Find most similar user in training data (assuming similarity scores are stored somewhere)
     most_similar_user_index = np.argmax(similarity_matrix, axis=0)  # Find index of max similarity
     # Predict cluster label based on most similar user's cluster
@@ -138,7 +138,12 @@ if st.button("Submit Ratings", disabled=submit_button_disabled):
         user_ratings[movie_id] = [rating, datetime.datetime.now()]
 
 # Recommendation section
-recommendations = recommend_movies(user_ratings, movies.copy())
+recommendations = recommend_movies(user_ratings)
+
+# Sorting the results
+sorted_movies = dict(sorted(recommendations.items(), key=lambda item: item[1], reverse=True))
+# Fetching top 5 movies
+top_5_movies = list(sorted_movies.keys())[:5]
 st.subheader("Recommended Movies for You:")
-for movie in recommendations:
-    st.write(movie)
+for movie in top_5_movies:
+    st.write(movie_df.iloc[movie]["title"])
