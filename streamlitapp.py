@@ -3,15 +3,16 @@ import pandas as pd
 import pickle
 import numpy as np
 import datetime
+import gzip
 
 @st.cache_data
 def load_data():
     # Data fetch
     rating_df = pd.read_pickle("./project_data/rating.pkl")
     movie_df = pd.read_csv("./project_data/movie.csv")
-    with open('./data/similarity_matrix.pkl', 'rb') as f:
+    with gzip.open('./project_data/similarity_matrix.pkl.gz', 'rb') as f:
         similarity_matrix = pickle.load(f)
-    with open('./data/clustered_data.pkl', 'rb') as f:
+    with gzip.open('./project_data/clustered_data.pkl.gz', 'rb') as f:
         clustered_df = pickle.load(f)
 
     # Filtering the relevant movies
