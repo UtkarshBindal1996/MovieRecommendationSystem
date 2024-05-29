@@ -14,10 +14,6 @@ def load_data():
     with open('./data/clustered_data.pkl', 'rb') as f:
         clustered_df = pickle.load(f)
 
-    # Data preprocess
-    # rating_df['timestamp'] = pd.to_datetime(rating_df['timestamp'])
-    # rating_df = rating_df[rating_df['timestamp'].dt.year >= 2014]
-
     # Filtering the relevant movies
     unique_movies_id = rating_df['movieId'].unique().tolist()
     unique_movies_names = []
