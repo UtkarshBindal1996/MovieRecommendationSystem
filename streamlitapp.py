@@ -7,16 +7,16 @@ import datetime
 @st.cache_data
 def load_data():
     # Data fetch
-    rating_df = pd.read_csv("./data/rating.csv")
-    movie_df = pd.read_csv("./data/movie.csv")
+    rating_df = pd.read_pickle("./project_data/rating.pkl")
+    movie_df = pd.read_csv("./project_data/movie.csv")
     with open('./data/similarity_matrix.pkl', 'rb') as f:
         similarity_matrix = pickle.load(f)
     with open('./data/clustered_data.pkl', 'rb') as f:
         clustered_df = pickle.load(f)
 
     # Data preprocess
-    rating_df['timestamp'] = pd.to_datetime(rating_df['timestamp'])
-    rating_df = rating_df[rating_df['timestamp'].dt.year >= 2014]
+    # rating_df['timestamp'] = pd.to_datetime(rating_df['timestamp'])
+    # rating_df = rating_df[rating_df['timestamp'].dt.year >= 2014]
 
     # Filtering the relevant movies
     unique_movies_id = rating_df['movieId'].unique().tolist()
