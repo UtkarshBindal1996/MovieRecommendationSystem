@@ -117,7 +117,7 @@ def recommend_movies(user_ratings):
     
     return recommendations
 
-st.title("Movie Mate: Find your next cinematic match")
+st.title("Watchlist Wizard: Find your next cinematic match")
 st.write("Simply rate a couple of movies from the list below and hit get recomendation!")
 
 # User input section
